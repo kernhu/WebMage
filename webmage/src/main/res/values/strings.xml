@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_item_select_to_copy">选择复制</string>
+    <string name="menu_item_select_to_search">选择搜索</string>
+    <string name="menu_item_change_font_size">网页字体大小</string>
+    <string name="menu_item_save_offline_page">保存离线网页</string>
+    <string name="menu_item_collect_website">收藏网页</string>
+    <string name="menu_item_share_website">分享网页</string>
+    <string name="menu_item_save_picture">保存图片</string>
+    <string name="menu_item_preview_picture">查看图片</string>
+    <string name="menu_item_share_picture">分享图片</string>
+    <string name="menu_item_call_number">呼叫号码</string>
+    <string name="menu_item_copy_number">复制号码</string>
+    <string name="menu_item_send_msg">发送短信</string>
+    <string name="menu_item_add_contact">保存联系人</string>
+    <string name="menu_item_send_email">发送邮件</string>
+    <string name="menu_item_copy_email_address">复制邮箱地址</string>
+
+    <!--********************************************************-->
+    <string name="error_page_description">加载失败，页面丢失啦！\n %1$s;%2$s</string>
+    <string name="error_page_reload">刷新重试</string>
+    <string name="error_page_network">检查网络</string>
+
+    <!--********************************************************-->
+    <!-- location -->
+    <string name="location_tips">定位提示：</string>
+    <string name="location_host_unknown">未知来源</string>
+    <string name="location_message">[%s]发起定位,是否允许？</string>
+    <string name="location_allow">允许</string>
+    <string name="location_refuse">拒绝</string>
+    <!-- deeplink  -->
+    <string name="deeplink_tooltip_title">提示：</string>
+    <string name="deeplink_tooltip_negative">拒绝</string>
+    <string name="deeplink_tooltip_positive">允许</string>
+
+    <string name="deeplink_tel_message">是否拨打号码【%s】？</string>
+    <string name="deeplink_sms_message">是否向【%s】发送短信？</string>
+    <string name="deeplink_email_message">是否向【%s】发送邮件？</string>
+    <string name="deeplink_tooltip_message">由【%s】发起跳转请求,是否同意？</string>
+
+    <string name="deeplink_tel_tip">系统内无拨号程序</string>
+    <string name="deeplink_sms_tip">系统内无发短信程序</string>
+    <string name="deeplink_email_tip">系统内无发邮件程序</string>
+
+    <!--********************************************************-->
+    <!-- js alert -->
+    <string name="js_alert_tips">消息提示：</string>
+    <string name="js_alert_host_unknown">未知来源</string>
+    <string name="js_alert_message">[%s]发来消息：\n%s</string>
+    <string name="js_alert_sure">确定</string>
+    <string name="js_alert_cancel">取消</string>
+    <string name="file_finder_gallery">相册</string>
+    <string name="file_finder_camera">拍照</string>
+    <string name="file_finder_cancel">取消</string>
+
+    <string name="camera_supports_fail">设备相机不可用！</string>
+    <string name="picture_get_fail">图片获取失败！</string>
+
+
+    <!-- 运行时权限 -->
+    <string name="permission_helping">帮助</string>
+    <string name="permission_warning">当前应用缺少必要权限。\n \n 请点击 \"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="permission_cancel">取消</string>
+    <string name="permission_setting">设置</string>
+    <!-- 运行时权限 -->
+
+    <!-- 权限 -->
+    <string name="permission_camera_fail">无调用相机权限！</string>
+    <string name="permission_location_fail">无调用定位权限！</string>
+    <string name="file_chooser_title">文件上传</string>
+
+
+</resources>

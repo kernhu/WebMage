@@ -1,0 +1,3 @@
+include ':webmage'
+include ':app'
+rootProject.name = "WebMage"

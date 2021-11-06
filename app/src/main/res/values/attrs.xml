@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FloatTitleView">
+        <attr name="ftv_reload_icon" format="reference" />
+        <attr name="ftv_default_favicon" format="reference" />
+        <attr name="ftv_title_color" format="color" />
+        <attr name="ftv_default_title" format="string" />
+    </declare-styleable>
+
+</resources>

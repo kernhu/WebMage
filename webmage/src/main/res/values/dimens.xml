@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="error_page_text_size">15sp</dimen>
+
+    <dimen name="sheet_menu_window_padding">15dp</dimen>
+    <dimen name="sheet_menu_window_radius">20dp</dimen>
+    <dimen name="sheet_menu_window_stroke">1dp</dimen>
+    <dimen name="sheet_menu_window_margin">10dp</dimen>
+    <dimen name="sheet_menu_window_text_size">15sp</dimen>
+
+    <dimen name="dimen_hint">15sp</dimen>
+
+</resources>

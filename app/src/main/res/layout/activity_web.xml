@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/web_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WebActivity">
+
+    <com.xcion.web.floatview.FloatTitleView
+        android:id="@+id/float_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#03A9F4"
+        app:ftv_default_favicon="@drawable/ic_default_favicon"
+        app:ftv_default_title="@string/ftv_default_title"
+        app:ftv_reload_icon="@drawable/icon_reload"
+        app:ftv_title_color="@color/TextTheme" />
+
+</LinearLayout>

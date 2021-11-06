@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <script>
+    (function() {
+      var baseSize = 32
+      // 设置 rem 函数
+      function setRem() {
+        // 当前页面宽度相对于 720 宽的缩放比例，可根据自己需要修改。
+        var scale = document.documentElement.clientWidth / 720
+        // 设置页面根节点字体大小
+        document.documentElement.style.fontSize = (baseSize * Math.min(scale, 2)) + 'px'
+      }
+      // 初始化
+      setRem()
+      // 改变窗口大小时重新设置 rem
+      window.onresize=function(){
+        setRem()
+      }
+    })()
+  </script>
+
+    <style>
+    body {
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font-weight: normal;
+      vertical-align: baseline;
+      height: 100%;
+      line-height: 1.5;
+      font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /*阅读全文按钮样式*/
+    .shadow{
+      width: 100%;
+      height: 3rem;
+      background: linear-gradient(to bottom , rgba(255,255,255,0) , rgba(255,255,255,1) 100%);
+      background: -moz-linear-gradient(to bottom , rgba(255,255,255,0) , rgba(255,255,255,1) 100%) ;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1)));
+      background: -webkit-linear-gradient(to bottom , rgba(255,255,255,0) ,  rgba(255,255,255,1) 100%) ;
+      background: -o-linear-gradient(to bottom , rgba(255,255,255,0) ,  rgba(255,255,255,1) 100%);
+      background: -ms-linear-gradient(to bottom , rgba(255,255,255,0) ,  rgba(255,255,255,1) 100%) ;
+      position: absolute;
+      top: -2.85rem;
+      left: 0;
+    }
+    .show_more_btn {
+      display:block;
+      padding-top:1.5rem;
+      line-height:0.48rem;
+      clear:both;
+      font-size:0.8rem;
+      font-weight: normal!important;
+      text-align: center;
+      position: relative;
+      margin:0;
+    }
+    .show_more_btn div:nth-child(2) {
+      margin-bottom: 1.25rem;
+    }
+    .show_more_btn div p {
+      font-size: 1rem;
+      color: #199cff;
+      display: block;
+      line-height: 1rem;
+      margin-bottom: 0.3125rem;
+    }
+    .show_more_btn div img {
+      width: 0.9375rem;
+    }
+
+    /*新闻内容样式*/
+    .bookindex{
+      z-index: 200
+    }
+    .bookindex .group{
+      width: 100%;
+      height: 100%;
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem;
+      box-sizing: border-box;
+      overflow: hidden
+    }
+    .bookindex .text-item{
+      height: 700px;
+      overflow: hidden;
+      padding-bottom: 0.625rem
+    }
+    .bookindex .text-item>div span{
+      display: inline-block;
+      font-size: 0.8125rem;
+      margin-bottom: 0rem;
+      color: #929292;
+    }
+    .bookindex .text-item>div span:first-child{
+      margin-right: 0rem;
+      color: #525252;
+      font-size: 0.8125rem
+    }
+    .bookindex .text-item>div span:nth-child(2){
+      font-family: "Arial Regular";
+      margin-right:0rem;
+      font-size: 0.8125rem
+    }
+    .bookindex .text-item>div img{
+      width: 100%;
+      margin-top: 0.84375rem;
+    }
+    .bookindex .text-item>div p{
+      font-family: "Arial Regular";
+      font-weight: normal;
+      font-size: 1.09375rem;
+      line-height: 1.90625rem;
+      color: #666666;
+      text-align: justify;
+      text-justify: inter-ideograph;
+      margin-top: 0.84375rem;
+    }
+    .bookindex .text-item>div h1{
+      font-size: 1.4375rem;
+      line-height: 2rem;
+      color: #000000;
+      font-weight: bold;
+      margin: 0.96875rem 0rem 0.9rem 0rem;
+      text-align: justify;
+      text-justify: inter-ideograph
+    }
+    .bookindex .text-item .text{
+      width: 100%
+    }
+    .bookindex .text-item:last-of-type{
+      /*padding-bottom 4.5rem*/
+      padding-top: 0.5rem
+    }
+  </style>
+</head>
+<body>
+<div class="bookindex">
+    <div class="group">
+        <div class="text-item" id="text-item">
+        </div>
+        <div class="show_more_btn" id="show_more_btn" onclick="showMore()">
+            <div class="shadow" id="shadow"></div>
+            <div>
+                <p>点击阅读全文</p>
+                <img src="arrow.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+   var RE={};
+   RE.htmlContent = document.getElementById('text-item');
+   RE.getShow = function (contents) {
+        RE.htmlContent.innerHTML = decodeURIComponent(contents.replace(/\+/g, '%20'));
+         <!--document.getElementById("text-item").style.height ="700px";-->
+        <!--document.getElementById("text-item").style.overflowY = "hidden";-->
+   }
+
+    function showMore() {
+      document.getElementById("text-item").style.overflowY = "auto";
+      document.getElementById("show_more_btn").style.display = "none";
+      document.getElementById("text-item").style.height = "auto";
+    }
+
+   var baseSize = 32
+    // 设置 rem 函数
+    function setRem() {
+      // 当前页面宽度相对于 720 宽的缩放比例，可根据自己需要修改。
+      var scale = document.documentElement.clientWidth / 720
+      // 设置页面根节点字体大小
+      document.documentElement.style.fontSize = (baseSize * Math.min(scale, 2)) + 'px'
+    }
+    // 初始化
+    setRem()
+    // 改变窗口大小时重新设置 rem
+    window.resize = function () {
+      setRem()
+    }
+
+</script>
+</body>
+</html>

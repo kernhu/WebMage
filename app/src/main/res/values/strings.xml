@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WebMage</string>
+    <string name="webmage_title">WebMage 功能演示</string>
+    <string name="ftv_default_title">正在加载中···</string>
+</resources>

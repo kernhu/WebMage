@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f5461a</color>
+    <color name="colorPrimaryDark">#FFEB3B</color>
+    <color name="colorAccent">#4CAF50</color>
+
+    <color name="CardTheme">#656D78</color>
+    <color name="TipsTheme">#967ADC</color>
+    <color name="TextTheme">#FFFFFF</color>
+    <color name="error_page_text_hint_color">#A3A3A3</color>
+
+    <color name="purple_500">#2196F3</color>
+    <color name="purple_700">#2196F3</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="purple_200">#FFBB86FC</color>
+</resources>

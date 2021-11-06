@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>JS Message 调用Android 测试</title>
+
+    <script type="text/javascript">
+
+        function alertClick() {
+            alert('WebMage即将对你说：Hello！')
+             window.document.getElementById("sayHello").innerText="Hello"
+        }
+
+        function confirmClick() {
+            var result= confirm('你喜欢WebMage吗？')
+            if(!result){
+                window.document.getElementById("jsLike").innerText="伤心至极！！"
+            }else{
+                window.document.getElementById("jsLike").innerText="谢谢你的支持！！"
+            }
+        }
+
+        function promptClick() {
+            var result=  prompt('你想对WebMage说些啥？')
+            if(result){
+                window.document.getElementById("inputContext").innerText=result
+            }
+        }
+
+    </script>
+
+
+    <style>
+
+        .main{
+            text-align: center;
+            background-color: #fff;
+            border-radius: 20px;
+            width: 300px;
+            height: 350px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <br>
+        <br>
+            <button onclick="alertClick()">alert弹窗</button> <p id="sayHello"></p>
+        <br>
+        <br>
+            <button onclick="confirmClick()">confirm弹窗</button> <p id="jsLike"></p>
+        <br>
+        <br>
+        <button onclick="promptClick()">prompt弹窗</button> <p id="inputContext"></p>
+        <br>
+        <br>
+    </div>
+
+</body>
+
+</html>

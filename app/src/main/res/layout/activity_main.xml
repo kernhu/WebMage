@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.xcion.lib.SwipeRecyclerView
+        android:id="@+id/swipe_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srv_autoCompleteLoadingMore="true"
+        app:srv_autoCompleteRefreshing="true"
+        app:srv_clipToPadding="true"
+        app:srv_empty_layout="@layout/srv_layout_empty_view"
+        app:srv_error_layout="@layout/srv_layout_error_view"
+        app:srv_loading_layout="@layout/srv_layout_loading_view"
+        app:srv_loadmore_layout="@layout/srv_layout_loadmore_view"
+        app:srv_paddingLeft="10px"
+        app:srv_paddingRight="10px"
+        app:srv_scrollbar_enable="true" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

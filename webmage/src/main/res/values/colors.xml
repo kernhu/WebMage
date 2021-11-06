@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="error_page_text_color">#858585</color>
+    <color name="error_page_text_hint_color">#A3A3A3</color>
+
+    <color name="theme_hint_title">#313131</color>
+    <color name="theme_hint_message">#313131</color>
+    <color name="theme_hint_positive">#009688</color>
+    <color name="theme_hint_negative">#009688</color>
+
+    <color name="theme_hint_shadow">#33303030</color>
+    <color name="theme_hint_background">#FFFFFF</color>
+
+</resources>
