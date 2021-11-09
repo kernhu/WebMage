@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.xcion.webmage.utils.DensityUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,12 +74,5 @@ class MenuItemAdapter<T> extends ArrayAdapter<T> {
             tv.setText(getContext().getResources().getString(image_anchor.getResId()));
         }
         return convertView;
-    }
-
-    /**
-     * @return get the total height of the item
-     */
-    public int getItemTotalHeight() {
-        return MAX_ITEM_HEIGHT * getCount();
     }
 }

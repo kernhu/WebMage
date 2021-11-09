@@ -16,6 +16,13 @@
     <string name="menu_item_send_email">发送邮件</string>
     <string name="menu_item_copy_email_address">复制邮箱地址</string>
 
+    <string name="menu_item_backstage_to_open">后台打开</string>
+    <string name="menu_item_new_window_to_open">新窗口打开</string>
+    <string name="menu_item_copy_url_address">复制链接地址</string>
+    <string name="menu_item_save_website">保存网页</string>
+    <string name="menu_item_save_image">下载图片</string>
+
+    <string name="menu_item_location">获取位置</string>
     <!--********************************************************-->
     <string name="error_page_description">加载失败，页面丢失啦！\n %1$s;%2$s</string>
     <string name="error_page_reload">刷新重试</string>

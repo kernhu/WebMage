@@ -1,18 +1,13 @@
 package com.xcion.webmage.longpress;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -20,8 +15,6 @@ import android.widget.PopupWindow;
 import com.xcion.webmage.R;
 import com.xcion.webmage.picture.ImagePreviewer;
 import com.xcion.webmage.popupwindow.MagePopupWindow;
-import com.xcion.webmage.popupwindow.XGravity;
-import com.xcion.webmage.popupwindow.YGravity;
 import com.xcion.webmage.share.SystemSharer;
 
 import java.lang.ref.WeakReference;
@@ -95,6 +88,7 @@ public class PopupMenuWindow {
         List<Object> items = new ArrayList<>();
         WebView.HitTestResult result = webView.getHitTestResult();
         int type = result.getType();
+        Log.e("sos", "createItems>>>" + type);
         switch (type) {
             case WebView.HitTestResult.PHONE_TYPE:
                 /**处理拨号**/
@@ -110,14 +104,20 @@ public class PopupMenuWindow {
                 break;
             case WebView.HitTestResult.GEO_TYPE:
                 /**地图类型**/
-
+                for (MenuItem.GEO geo : MenuItem.GEO.values()) {
+                    items.add(geo);
+                }
                 break;
             case WebView.HitTestResult.SRC_ANCHOR_TYPE:
                 /**超链接**/
-
+                for (MenuItem.SRC_ANCHOR srcAnchor : MenuItem.SRC_ANCHOR.values()) {
+                    items.add(srcAnchor);
+                }
                 break;
             case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
-
+                for (MenuItem.IMAGE_ANCHOR imageAnchor : MenuItem.IMAGE_ANCHOR.values()) {
+                    items.add(imageAnchor);
+                }
                 break;
             case WebView.HitTestResult.IMAGE_TYPE:
                 /**处理长按图片的菜单项**/
@@ -139,16 +139,8 @@ public class PopupMenuWindow {
     public void build() {
         List<Object> items = createItems();
         mListView.setAdapter(new MenuItemAdapter<Object>(contextReference.get(), android.R.layout.simple_list_item_1, items));
-        int maxHeight = ((MenuItemAdapter) mListView.getAdapter()).getItemTotalHeight();
-        int offsetY;
-        if (mDisplayMetrics.heightPixels - pointY < maxHeight) {
-            offsetY = mDisplayMetrics.heightPixels - maxHeight;
-        } else {
-            offsetY = (int) pointY;
-        }
-        Log.e("sos", maxHeight + ";;;heightPixels==" + mDisplayMetrics.heightPixels + ";;;offsetY>>>" + offsetY);
-        mPopupWindow.showAsDropDown(webView, (int) pointX, offsetY);
-        //825.411
+        int[] location = PopupWindowLocation.calculatePopWindowPos(webView, mListView, (int) pointX, (int) pointY);
+        mPopupWindow.showAtLocation(webView, Gravity.TOP | Gravity.START, location[0], location[1]);
     }
 
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
@@ -165,7 +157,6 @@ public class PopupMenuWindow {
             doControl();
         }
     };
-
 
     private void doControl() {
 

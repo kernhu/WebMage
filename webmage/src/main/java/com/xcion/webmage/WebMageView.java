@@ -142,6 +142,7 @@ public class WebMageView extends DampingLayout implements ILifecycle, WebMageCon
             ((ViewGroup) mWebView.getParent()).removeAllViews();
         }
         this.addView(mWebView, mWebParams);
+        mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         /**
          * Hybrider init
@@ -246,11 +247,9 @@ public class WebMageView extends DampingLayout implements ILifecycle, WebMageCon
                     .setPointY(mPointY)
                     .setMenuControl(mLongPressMenuControl)
                     .build();
-
             if (WebMage.getWebOptions().isVibratorEnable()) {
                 VibratorUtils.setVibrator(getContext(), VibratorUtils.Effect.LONG_PRESS);
             }
-
             return true;
         }
     };
