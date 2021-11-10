@@ -72,6 +72,9 @@ public class DeeplinkWindow {
          */
         void onNegative();
 
+
+        void onDismiss();
+
     }
 
     public String getTitle() {
@@ -257,6 +260,7 @@ public class DeeplinkWindow {
                 } else if (result == Result.NEGATIVE) {
                     callback.onNegative();
                 } else {
+                    callback.onDismiss();
                 }
             }
         }

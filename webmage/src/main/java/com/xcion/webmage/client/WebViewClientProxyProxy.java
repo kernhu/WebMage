@@ -116,12 +116,14 @@ public class WebViewClientProxyProxy extends WebViewClient implements IClientPro
         } else {
             //other deep link
             if (WebMage.getWebOptions().isDeepLinkEnable()) {
-                return mDeeplinkScheduler
-                        .with(activity)
-                        .setTooltip(WebMage.getWebOptions().isDeepLinkTooltip())
-                        .setDeeplink(url)
-                        .setAnchorView(view)
-                        .commit();
+                if (!DeeplinkScheduler.isShowing) {
+                    return mDeeplinkScheduler
+                            .with(activity)
+                            .setTooltip(WebMage.getWebOptions().isDeepLinkTooltip())
+                            .setDeeplink(url)
+                            .setAnchorView(view)
+                            .commit();
+                }
             }
             return true;
         }

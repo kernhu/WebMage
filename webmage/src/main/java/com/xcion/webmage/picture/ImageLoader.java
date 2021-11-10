@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @Author: Kern Hu
@@ -30,14 +32,25 @@ public class ImageLoader {
     private int readTimeout = 1000 * 12;
     private String url;
     private Callback callback;
+    private ExecutorService executor = Executors.newCachedThreadPool();
 
     public interface Callback {
 
+        /**
+         * @param bitmap
+         */
         void onSuccess(Bitmap bitmap);
 
+        /**
+         * @param error
+         */
         void onFailure(String error);
 
+        /**
+         * @param progress
+         */
         void onProgressChanged(int progress);
+
     }
 
 
@@ -84,20 +97,17 @@ public class ImageLoader {
 
 
     public void load() {
-
-        new LoaderAsyncTask(getConnectTimeout(), getReadTimeout(), getUrl(), getCallback()).execute();
-
+        executor.execute(new LoaderRunnable(getConnectTimeout(), getReadTimeout(), getUrl(), getCallback()));
     }
 
-
-    class LoaderAsyncTask extends AsyncTask<String, Integer, Bitmap> {
+    class LoaderRunnable implements Runnable {
 
         int connectTimeout;
         int readTimeout;
         String imageUrl;
         Callback callback;
 
-        public LoaderAsyncTask(int connectTimeout, int readTimeout, String imageUrl, Callback callback) {
+        public LoaderRunnable(int connectTimeout, int readTimeout, String imageUrl, Callback callback) {
             this.connectTimeout = connectTimeout;
             this.readTimeout = readTimeout;
             this.imageUrl = imageUrl;
@@ -105,16 +115,7 @@ public class ImageLoader {
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            if (callback != null) {
-                callback.onProgressChanged(values[0]);
-            }
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-
+        public void run() {
             HttpURLConnection connection = null;
             Bitmap bitmap = null;
             InputStream inputStream = null;
@@ -135,15 +136,19 @@ public class ImageLoader {
                 while ((len = inputStream.read(data)) != -1) {
                     total_length += len;
                     value = ((total_length / fileLength) * 100);
-                    publishProgress(value);
                     outputStream.write(data, 0, len);
+                    if (callback != null) {
+                        callback.onProgressChanged(value);
+                    }
                 }
                 byte[] result = outputStream.toByteArray();
                 bitmap = BitmapFactory.decodeByteArray(result, 0, result.length);
                 inputStream.close();
                 outputStream.close();
                 connection.disconnect();
-
+                if (callback != null) {
+                    callback.onSuccess(bitmap);
+                }
             } catch (ProtocolException e) {
                 e.printStackTrace();
                 if (callback != null) {
@@ -168,17 +173,6 @@ public class ImageLoader {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if (bitmap != null) {
-                if (callback != null) {
-                    callback.onSuccess(bitmap);
                 }
             }
         }

@@ -138,6 +138,9 @@ public class PopupMenuWindow {
 
     public void build() {
         List<Object> items = createItems();
+        if (items == null || items.size() == 0) {
+            return;
+        }
         mListView.setAdapter(new MenuItemAdapter<Object>(contextReference.get(), android.R.layout.simple_list_item_1, items));
         int[] location = PopupWindowLocation.calculatePopWindowPos(webView, mListView, (int) pointX, (int) pointY);
         mPopupWindow.showAtLocation(webView, Gravity.TOP | Gravity.START, location[0], location[1]);

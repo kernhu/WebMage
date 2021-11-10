@@ -8,9 +8,11 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.xcion.webmage.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -32,8 +34,17 @@ public class DeeplinkScheduler {
 
     enum Type {
 
+        /**
+         * tel call
+         */
         TEL("tel:"),
+        /**
+         * sms
+         */
         SMS("sms:"),
+        /**
+         * email
+         */
         EMAIL("mailto:");
 
         String name;
@@ -44,6 +55,7 @@ public class DeeplinkScheduler {
 
     }
 
+    public static boolean isShowing = false;
     private DeeplinkWindow mDeeplinkWindow;
     private WeakReference<Context> reference;
     private boolean tooltip;
@@ -78,6 +90,7 @@ public class DeeplinkScheduler {
     }
 
     public void onDestroy() {
+        isShowing = false;
         reference = null;
         mDeeplinkWindow = null;
     }
@@ -91,6 +104,7 @@ public class DeeplinkScheduler {
         }
         // 打电话、发短信、发邮件
         deeplink = deeplink.trim();
+        Log.e("sos", "deeplink===" + deeplink);
         String title = "";
         String message = "";
         String stamp = "";
@@ -139,6 +153,9 @@ public class DeeplinkScheduler {
      * @return
      */
     private boolean showTipWindow(Context context, Intent intent, String title, String message, String stamp) {
+        if (isShowing) {
+            return resultValue;
+        }
         mDeeplinkWindow
                 .setTitle(title)
                 .setMessage(message)
@@ -149,6 +166,7 @@ public class DeeplinkScheduler {
                 .setCallback(new DeeplinkWindow.Callback() {
                     @Override
                     public void onPositive() {
+                        isShowing = false;
                         try {
                             (context).startActivity(intent);
                             resultValue = true;
@@ -174,11 +192,20 @@ public class DeeplinkScheduler {
 
                     @Override
                     public void onNegative() {
+                        isShowing = false;
+                        onDestroy();
+                        resultValue = true;
+                    }
+
+                    @Override
+                    public void onDismiss() {
+                        isShowing = false;
                         onDestroy();
                         resultValue = true;
                     }
                 })
                 .show();
+        isShowing = true;
         return resultValue;
     }
 
