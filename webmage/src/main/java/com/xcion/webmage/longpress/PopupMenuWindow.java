@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.xcion.webmage.R;
+import com.xcion.webmage.feature.phone.PhoneFeature;
 import com.xcion.webmage.picture.ImagePreviewer;
 import com.xcion.webmage.popupwindow.MagePopupWindow;
 import com.xcion.webmage.share.SystemSharer;
@@ -36,7 +37,7 @@ public class PopupMenuWindow {
     private WeakReference<Context> contextReference;
     private float pointX;
     private float pointY;
-    private WebView webView;
+    private WeakReference<WebView> webViewReference;
     private LongPressMenuControl menuControl;
     private MagePopupWindow mPopupWindow;
     private DisplayMetrics mDisplayMetrics;
@@ -65,7 +66,7 @@ public class PopupMenuWindow {
     }
 
     public PopupMenuWindow setWebView(WebView webView) {
-        this.webView = webView;
+        this.webViewReference = new WeakReference<>(webView);
         return this;
     }
 
@@ -86,7 +87,10 @@ public class PopupMenuWindow {
 
     private List<Object> createItems() {
         List<Object> items = new ArrayList<>();
-        WebView.HitTestResult result = webView.getHitTestResult();
+        if (webViewReference == null || webViewReference.get() == null) {
+            return null;
+        }
+        WebView.HitTestResult result = webViewReference.get().getHitTestResult();
         int type = result.getType();
         Log.e("sos", "createItems>>>" + type);
         switch (type) {
@@ -141,9 +145,12 @@ public class PopupMenuWindow {
         if (items == null || items.size() == 0) {
             return;
         }
+        if (webViewReference == null || webViewReference.get() == null) {
+            return;
+        }
         mListView.setAdapter(new MenuItemAdapter<Object>(contextReference.get(), android.R.layout.simple_list_item_1, items));
-        int[] location = PopupWindowLocation.calculatePopWindowPos(webView, mListView, (int) pointX, (int) pointY);
-        mPopupWindow.showAtLocation(webView, Gravity.TOP | Gravity.START, location[0], location[1]);
+        int[] location = PopupWindowLocation.calculatePopWindowPos(webViewReference.get(), mListView, (int) pointX, (int) pointY);
+        mPopupWindow.showAtLocation(webViewReference.get(), Gravity.TOP | Gravity.START, location[0], location[1]);
     }
 
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
@@ -161,10 +168,48 @@ public class PopupMenuWindow {
         }
     };
 
+    /**
+     * do the event
+     */
     private void doControl() {
-
-        String extra = webView.getHitTestResult().getExtra();
-        if (mTargetItem instanceof MenuItem.TEXT) {
+        if (webViewReference == null || webViewReference.get() == null) {
+            return;
+        }
+        String extra = webViewReference.get().getHitTestResult().getExtra();
+        if (mTargetItem instanceof MenuItem.PHONE) {
+            /**
+             * cell phone number
+             **/
+            MenuItem.PHONE phone = (MenuItem.PHONE) mTargetItem;
+            switch (phone) {
+                case CALL_NUMBER:
+                    PhoneFeature
+                            .getInstance(contextReference.get())
+                            .setTargetExtra(extra)
+                            .callUp();
+                    break;
+                case COPY_NUMBER:
+                    PhoneFeature
+                            .getInstance(contextReference.get())
+                            .setTargetExtra(extra)
+                            .copyNumber();
+                    break;
+                case SEND_MSG:
+                    PhoneFeature
+                            .getInstance(contextReference.get())
+                            .setTargetExtra(extra)
+                            .sendMessage();
+                    break;
+                case SHARE_TO:
+                    PhoneFeature
+                            .getInstance(contextReference.get())
+                            .setTargetExtra(extra)
+                            .shareTo();
+                    break;
+                default:
+                    break;
+            }
+        } else if (mTargetItem instanceof MenuItem.TEXT) {
             MenuItem.TEXT text = (MenuItem.TEXT) mTargetItem;
 
             if (MenuItem.TEXT.SELECT_TO_COPY == text) {
@@ -180,8 +225,8 @@ public class PopupMenuWindow {
             } else if (MenuItem.TEXT.COLLECT_WEBSITE == text) {
 
             } else if (MenuItem.TEXT.SHARE_WEBSITE == text) {
-                if (contextReference != null && contextReference.get() != null && webView != null) {
-                    SystemSharer.shareText(contextReference.get(), webView.getUrl(), "");
+                if (contextReference != null && contextReference.get() != null && webViewReference != null && webViewReference.get() != null) {
+                    SystemSharer.shareText(contextReference.get(), webViewReference.get().getUrl(), "");
                 }
             }
         } else if (mTargetItem instanceof MenuItem.IMAGE) {
@@ -193,7 +238,7 @@ public class PopupMenuWindow {
 
                 ImagePreviewer
                         .getInstance(contextReference.get())
-                        .setParent(webView)
+                        .setParent(webViewReference.get())
                         .setUrl(extra)
                         .setDismissListener(new PopupWindow.OnDismissListener() {
                             @Override
@@ -214,7 +259,7 @@ public class PopupMenuWindow {
 
             } else if (MenuItem.PHONE.SEND_MSG == phone) {
 
-            } else if (MenuItem.PHONE.ADD_CONTACT == phone) {
+            } else if (MenuItem.PHONE.SHARE_TO == phone) {
 
             }
 

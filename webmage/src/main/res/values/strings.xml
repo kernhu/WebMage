@@ -9,10 +9,12 @@
     <string name="menu_item_save_picture">保存图片</string>
     <string name="menu_item_preview_picture">查看图片</string>
     <string name="menu_item_share_picture">分享图片</string>
-    <string name="menu_item_call_number">呼叫号码</string>
-    <string name="menu_item_copy_number">复制号码</string>
-    <string name="menu_item_send_msg">发送短信</string>
-    <string name="menu_item_add_contact">保存联系人</string>
+
+    <string name="menu_item_tel_call">呼叫号码</string>
+    <string name="menu_item_tel_copy">复制号码</string>
+    <string name="menu_item_tel_message">发送短信</string>
+    <string name="menu_item_tel_share">分享</string>
+
     <string name="menu_item_send_email">发送邮件</string>
     <string name="menu_item_copy_email_address">复制邮箱地址</string>
 
@@ -75,6 +77,7 @@
     <string name="permission_camera_fail">无调用相机权限！</string>
     <string name="permission_location_fail">无调用定位权限！</string>
     <string name="file_chooser_title">文件上传</string>
+    <string name="menu_copy_number">号码已复制到粘贴板</string>
 
 
 </resources>

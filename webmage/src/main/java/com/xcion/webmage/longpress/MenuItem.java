@@ -91,19 +91,19 @@ public class MenuItem {
         /**
          *
          */
-        CALL_NUMBER(R.string.menu_item_call_number),
+        CALL_NUMBER(R.string.menu_item_tel_call),
         /**
          *
          */
-        COPY_NUMBER(R.string.menu_item_copy_number),
+        COPY_NUMBER(R.string.menu_item_tel_copy),
         /**
          *
          */
-        SEND_MSG(R.string.menu_item_send_msg),
+        SEND_MSG(R.string.menu_item_tel_message),
         /**
          *
          */
-        ADD_CONTACT(R.string.menu_item_add_contact);
+        SHARE_TO(R.string.menu_item_tel_share);
 
         public int resId;
 

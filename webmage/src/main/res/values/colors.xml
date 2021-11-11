@@ -9,7 +9,7 @@
     <color name="theme_hint_positive">#009688</color>
     <color name="theme_hint_negative">#009688</color>
 
-    <color name="theme_hint_shadow">#33303030</color>
+    <color name="theme_hint_shadow">#303030</color>
     <color name="theme_hint_background">#FFFFFF</color>
 
 </resources>

@@ -1,10 +1,7 @@
 package com.xcion.webmage.picture;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,8 +20,8 @@ import java.util.concurrent.Executors;
  * @UpdateUser: Kern Hu
  * @UpdateDate: 2020/10/9 17:37
  * @Version: 1.0
- * @Description: java类作用描述
- * @UpdateRemark: 更新说明
+ * @Description: http download image util
+ * @UpdateRemark:
  */
 public class ImageLoader {
 

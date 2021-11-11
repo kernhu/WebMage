@@ -67,14 +67,14 @@ public class WebMage {
     }
 
     public WebMage(Builder builder) {
-        this.webOptions = builder.getWebOptions() != null ? builder.getWebOptions() : new WebOptions().build();
-        this.videoOptions = builder.getVideoOptions() != null ? builder.getVideoOptions() : new VideoOptions().build();
-        this.downloadOptions = builder.getDownloadOptions() != null ? builder.getDownloadOptions() : new DownloadOptions().build();
-        this.folderOptions = builder.getFolderOptions() != null ? builder.getFolderOptions() : new FolderOptions().build();
-        this.indicatorOptions = builder.getIndicatorOptions() != null ? builder.getIndicatorOptions() : new IndicatorOptions().build();
-        this.preInitCore = builder.isPreInitCore();
-        this.preLoadUrl = builder.getPreLoadUrl();
-        this.captureStrategy = builder.getCaptureStrategy();
+        WebMage.webOptions = builder.getWebOptions() != null ? builder.getWebOptions() : new WebOptions().build();
+        WebMage.videoOptions = builder.getVideoOptions() != null ? builder.getVideoOptions() : new VideoOptions().build();
+        WebMage.downloadOptions = builder.getDownloadOptions() != null ? builder.getDownloadOptions() : new DownloadOptions().build();
+        WebMage.folderOptions = builder.getFolderOptions() != null ? builder.getFolderOptions() : new FolderOptions().build();
+        WebMage.indicatorOptions = builder.getIndicatorOptions() != null ? builder.getIndicatorOptions() : new IndicatorOptions().build();
+        WebMage.preInitCore = builder.isPreInitCore();
+        WebMage.preLoadUrl = builder.getPreLoadUrl();
+        WebMage.captureStrategy = builder.getCaptureStrategy();
         Log.i(TAG, "WebMage initialization is complete with " + (System.currentTimeMillis() - beginInitTime) + " milliseconds");
     }
 
