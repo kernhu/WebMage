@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -176,6 +178,7 @@ public class PopupMenuWindow {
             return;
         }
         String extra = webViewReference.get().getHitTestResult().getExtra();
+        Log.e("sos", "extra>>>" + extra);
         if (mTargetItem instanceof MenuItem.PHONE) {
             /**
              * cell phone number
@@ -216,7 +219,27 @@ public class PopupMenuWindow {
                 //
                 //webView
 
-            } else if (MenuItem.TEXT.SELECT_TO_SEARCH == text) {
+                webViewReference.get().startActionMode(new ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, android.view.MenuItem item) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode mode) {
+
+                    }
+                });
 
             } else if (MenuItem.TEXT.CHANGE_FONT_SIZE == text) {
 

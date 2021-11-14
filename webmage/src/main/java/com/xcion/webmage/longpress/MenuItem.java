@@ -15,15 +15,10 @@ import com.xcion.webmage.R;
 public class MenuItem {
 
     public enum TEXT {
-
         /**
          *
          */
         SELECT_TO_COPY(R.string.menu_item_select_to_copy),
-        /**
-         *
-         */
-        SELECT_TO_SEARCH(R.string.menu_item_select_to_search),
         /**
          *
          */
